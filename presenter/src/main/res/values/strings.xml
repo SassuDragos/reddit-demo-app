@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">presenter</string>
+    <string name="home_screen_app_title">Mock Reddit Application</string>
+    <string name="loading_status_text">Fetching Data…</string>
+</resources>
