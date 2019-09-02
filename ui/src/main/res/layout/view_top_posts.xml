@@ -4,12 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.sogard.ui.HomeViewModel" />
+
+        <import type="androidx.recyclerview.widget.DividerItemDecoration" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_top_posts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp">
@@ -18,18 +23,21 @@
             android:id="@+id/btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{viewModel::clickBtn}"
             android:text="Click Here"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:onClick="@{viewModel::clickBtn}"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_posts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="100dp"
             android:clipToPadding="false"
+            app:dividerOrientation="@{DividerItemDecoration.VERTICAL}"
             app:itemBinding="@{viewModel.postItemBinding}"
+            app:itemDecorationDrawable="@{@drawable/divider_space}"
             app:items="@{viewModel.postList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 

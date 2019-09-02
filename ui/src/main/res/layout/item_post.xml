@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -12,16 +13,17 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="true">
-
+        android:clipToPadding="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:onClick="@{() -> viewModel.onPostClicked}"
+        app:cardCornerRadius="4dp"
+        app:contentPadding="8dp"
+        app:cardBackgroundColor="@android:color/holo_orange_dark">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_post_item"
-            android:onClick="@{() -> viewModel.onPostClicked}"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_title"
@@ -29,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:ellipsize="end"
-                android:singleLine="true"
+                android:maxLines="3"
                 android:text="@{viewModel.title}"
                 android:textSize="14sp"
                 tools:text="Another brick in the wall" />
