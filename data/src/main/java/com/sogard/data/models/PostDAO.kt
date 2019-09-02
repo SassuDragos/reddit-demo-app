@@ -10,8 +10,4 @@ data class PostDAO(
     @field:Json(name = "author_fullname") val authorName: String,
     @field:Json(name = "num_comments") val totalComments: Int,
     @field:Json(name = "permalink") val endpoint: String
-) {
-    fun toPost() : Post {
-        return Post(id, title, "", totalComments, endpoint)
-    }
-}
+)

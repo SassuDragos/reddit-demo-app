@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.sogard.ui.HomeViewModel" />
+            type="com.sogard.ui.TopPostsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

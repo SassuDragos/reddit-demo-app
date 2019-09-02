@@ -1,6 +1,6 @@
 package com.sogard.data
 
-import com.sogard.data.AppConfiguration.AUTHENTICATION_BASE_URL
+import com.sogard.data.AppConfiguration.REDDIT_PUBLIC_BASE_URL
 import com.sogard.data.AppConfiguration.BASE_URL
 import com.sogard.data.apis.AuthenticationApi
 import com.sogard.data.repositories.SharedPrefKeys
@@ -16,7 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 object AppConfiguration {
     //TODO: These could be defined in build/flavor config.
     val BASE_URL: String = "https://oauth.reddit.com"
-    val AUTHENTICATION_BASE_URL = "https://www.reddit.com"
+    val REDDIT_PUBLIC_BASE_URL = "https://www.reddit.com"
 
     val DEFAULT_GRANT_TYPE = "https://oauth.reddit.com/grants/installed_client"
 
@@ -31,7 +31,7 @@ class ApiServiceGenerator(sharedPrefHelper: SharedPreferencesHelper) {
     private val loggingInterceptor = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY}
     private val httpClient = OkHttpClient.Builder()
         .addInterceptor(AuthenticationInterceptor {
-            //TODO: This is not optimal. The token should be cached and the cashe component should
+            //TODO: This is sub optimal. The token should be cached and the cache component should
             // be provided instead.
             sharedPrefHelper.getString(SharedPrefKeys.KEY_TOKEN) ?: ""
         })
@@ -53,7 +53,7 @@ class ApiServiceGenerator(sharedPrefHelper: SharedPreferencesHelper) {
             .build()
 
         val authenticationRetrofit = retrofitBuilder
-            .baseUrl(AUTHENTICATION_BASE_URL)
+            .baseUrl(REDDIT_PUBLIC_BASE_URL)
             .client(okHttpClient)
             .build()
 

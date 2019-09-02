@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:clipToPadding="true"
         android:foreground="?attr/selectableItemBackground"
-        android:onClick="@{() -> viewModel.onPostClicked}"
+        android:onClick="@{() -> viewModel.onPostClicked()}"
         app:cardCornerRadius="4dp"
         app:contentPadding="8dp"
         app:cardBackgroundColor="@android:color/holo_orange_dark">
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:onClick="@{() -> viewModel.onViewCommentsClicked}"
+                android:onClick="@{() -> viewModel.onViewCommentsClicked()}"
                 android:text="@{`View Comments (` + viewModel.totalComments + `)`}"
                 tools:text="View Comments (243)" />
         </LinearLayout>

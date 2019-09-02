@@ -4,4 +4,4 @@ data class Post(val id: String,
                 val title: String,
                 val image: String,
                 val totalCommentNumber: Int,
-                val endpoint: String)
+                val detailsUrl: String)

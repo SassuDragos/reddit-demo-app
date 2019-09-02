@@ -8,6 +8,7 @@ import com.sogard.data.repositories.PostRepositoryImpl
 import com.sogard.domain.repositories.AuthenticationRepository
 import com.sogard.domain.repositories.PostRepository
 import com.sogard.domain.usecases.ApplicationInitializationUseCase
+import com.sogard.domain.usecases.TopPostsManagementUseCase
 import datasources.SharedPreferencesHelper
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.Module
@@ -39,10 +40,8 @@ val repositoryModule: Module = module {
 
 val useCaseModule: Module = module {
     single {
-        ApplicationInitializationUseCase(
-            authenticationRepository = get(),
-            postRepository = get()
-        )
+        ApplicationInitializationUseCase(authenticationRepository = get(), postRepository = get())
     }
+    single { TopPostsManagementUseCase(postRepository = get()) }
 }
 
