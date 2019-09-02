@@ -3,7 +3,6 @@
     xmlns:bind="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.sogard.ui.TopPostsViewModel" />
@@ -16,5 +15,6 @@
         <include
             layout="@layout/view_top_posts"
             bind:viewModel="@{viewModel}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

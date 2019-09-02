@@ -1,24 +1,22 @@
 package com.sogard.ui.topposts
 
+import androidx.lifecycle.MutableLiveData
 import com.sogard.domain.models.Post
+import com.sogard.ui.NavigationDestination
+import com.sogard.ui.NavigationDestination.CommentsDestination
+import com.sogard.ui.NavigationDestination.UrlDestination
 import com.sogard.ui.PostInterface
 
 class PostViewModel(
     post: Post,
-    private val onViewCommentsClicked: (postId: String) -> Unit,
-    private val onPostClicked: (postId: String, postEndpoint: String) -> Unit
+    private val navigationListener: MutableLiveData<NavigationDestination>
 ) : PostInterface {
     val title = post.title
     val totalComments = post.totalCommentNumber
     val id = post.id
-    private val endpoint = post.detailsUrl
+    private val detailsUrl = post.detailsUrl
 
-    fun onViewCommentsClicked() {
-        onViewCommentsClicked.invoke(id)
-    }
-
-    fun onPostClicked() {
-        onPostClicked.invoke(id, endpoint)
-    }
+    fun onViewCommentsClicked() = navigationListener.postValue(CommentsDestination(id))
+    fun onPostClicked() = navigationListener.postValue(UrlDestination(detailsUrl))
 }
 

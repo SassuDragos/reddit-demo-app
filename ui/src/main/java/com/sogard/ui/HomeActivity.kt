@@ -5,12 +5,15 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sogard.ui.databinding.ActivityHomeBinding
 import kotlinx.android.synthetic.main.view_top_posts.view.*
+
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -21,7 +24,6 @@ class HomeActivity : AppCompatActivity() {
             ViewModelProvider(this, SavedStateViewModelFactory(this.application, this)).get(
                 TopPostsViewModel::class.java
             )
-
 
         val binding: ActivityHomeBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_home)
@@ -35,6 +37,10 @@ class HomeActivity : AppCompatActivity() {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
                 viewModel.loadPosts()
             }
+        })
+
+        viewModel.navigationLiveData.observe(this, Observer { newDestination ->
+            NavigationHandler.goTo(newDestination, this)
         })
     }
 }

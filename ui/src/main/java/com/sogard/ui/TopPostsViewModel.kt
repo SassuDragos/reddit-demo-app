@@ -14,11 +14,8 @@ import org.koin.core.inject
 interface PostInterface
 
 class TopPostsViewModel : SplashViewModel() {
-    
-    private val topPostsManagementUseCase: TopPostsManagementUseCase by inject()
 
-    private val onViewCommentsClicked: (String) -> Unit = { postId ->  }
-    private val onPostClicked: (String, String) -> Unit = { postId, postEndpoint -> }
+    private val topPostsManagementUseCase: TopPostsManagementUseCase by inject()
 
     val postList: ObservableArrayList<PostInterface> = ObservableArrayList()
     val postItemBinding = OnItemBindClass<PostInterface>()
@@ -33,7 +30,7 @@ class TopPostsViewModel : SplashViewModel() {
             .getPosts(postList.size)
             .subscribe({ posts ->
                 val postVMList =
-                    posts.map { PostViewModel(it, onViewCommentsClicked, onPostClicked) }
+                    posts.map { PostViewModel(it, navigationLiveData) }
                 postList += postVMList
             }, {
                 Log.e("[POST LOADING FAILED]", it.message)
