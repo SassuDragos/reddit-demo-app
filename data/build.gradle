@@ -32,6 +32,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
     implementation("io.reactivex.rxjava2:rxkotlin:$rxkotlinVersion")
+
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitMoshiConverterVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation("com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion")
+
+    implementation project(path: ':domain')
+
 }
