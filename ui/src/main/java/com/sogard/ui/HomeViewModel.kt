@@ -1,4 +1,4 @@
-package com.sogard.presenter
+package com.sogard.ui
 
 import android.util.Log
 import android.view.View
@@ -7,11 +7,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sogard.domain.usecases.ApplicationInitializationUseCase
 import io.reactivex.disposables.CompositeDisposable
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+
+import me.tatarka.bindingcollectionadapter2.ItemBinding
+import androidx.databinding.ObservableArrayList
+import com.sogard.domain.models.Post
 
 
-class HomeViewModel(appInitUseCase: ApplicationInitializationUseCase) : ViewModel() {
+class HomeViewModel() : ViewModel(), KoinComponent {
 
     private val disposable: CompositeDisposable = CompositeDisposable()
+    val appInitUseCase: ApplicationInitializationUseCase by inject<ApplicationInitializationUseCase>()
+
+    val postList = ObservableArrayList<Post>()
+    val postItemBinding = ItemBinding.of<Post>(BR.viewModel, R.layout.item_post)
 
     init {
         val subscription = appInitUseCase
@@ -35,5 +45,14 @@ class HomeViewModel(appInitUseCase: ApplicationInitializationUseCase) : ViewMode
 
     fun clickBtn(view: View) {
         Toast.makeText(view.context, "Succeeded " + this.hashCode(), Toast.LENGTH_SHORT).show()
+        val subscription = appInitUseCase
+            .initializeApplication()
+            .subscribe({
+                text.value = 9999
+            }, {
+                text.value = -1
+                Log.e("[APP INIT FAILED] ", it.message)
+            })
+        disposable.add(subscription)
     }
 }

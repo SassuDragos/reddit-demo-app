@@ -1,2 +1,2 @@
-include ':app', ':presenter', ':domain'
+include ':app', ':ui', ':domain', ':data'
 rootProject.name='Reddit Demo App'

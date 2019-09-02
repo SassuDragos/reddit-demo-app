@@ -1,11 +1,11 @@
-package com.sogard.presenter
+package com.sogard.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
-import com.sogard.presenter.databinding.ActivityHomeBinding
+import com.sogard.ui.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
 
