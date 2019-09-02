@@ -8,4 +8,11 @@ ext {
 
     rxandroidVersion = '2.1.1'
     rxkotlinVersion = '2.4.0'
+
+    moshiVersion = '1.8.0'
+    retrofitMoshiConverterVersion = '2.6.1'
+    retrofitVersion = '2.6.1'
+    koinVersion = '2.0.1'
+    loggingInterceptorVersion = '4.1.0'
+
 }

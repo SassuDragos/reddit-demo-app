@@ -11,6 +11,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
+
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -35,5 +36,9 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.core:core-ktx:$corektxVersion"
 
-    implementation project(path: ':presenter')
+    implementation "org.koin:koin-android:$koinVersion"
+
+    implementation project(path: ':ui')
+    implementation project(path: ':data')
+    implementation project(path: ':domain')
 }
