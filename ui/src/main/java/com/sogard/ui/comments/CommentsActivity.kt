@@ -12,7 +12,7 @@ import com.sogard.ui.databinding.ActivityCommentsBinding
 import org.koin.core.KoinComponent
 
 
-class CommentsActivity() : AppCompatActivity(), KoinComponent {
+class CommentsActivity : AppCompatActivity(), KoinComponent {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

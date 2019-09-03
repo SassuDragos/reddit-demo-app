@@ -32,7 +32,7 @@ class TopArticlesViewModel : SplashViewModel() {
                     articles.map { ArticleViewModel(it, navigationLiveData) }
                 articleList += articleVMList
             }, {
-                Log.e("[POST LOADING FAILED]", it.message)
+                Log.e("[ERROR: POST LOADING]", it.message)
             })
         subscriptions.add(subscription)
     }

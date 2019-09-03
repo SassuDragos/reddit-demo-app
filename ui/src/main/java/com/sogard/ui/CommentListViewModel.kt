@@ -18,7 +18,7 @@ sealed class ResultState(val flipperIndex: Int) {
     object SuccessState : ResultState(2)
 }
 
-//TODO: there is a bug with AS and I can't move this to the comments package.
+//TODO: there is a bug with AS and I can't move this file to the comments package.
 class CommentListViewModel : BaseViewModel() {
 
     private val resourceProvider: ResourceProvider by inject()
@@ -29,12 +29,11 @@ class CommentListViewModel : BaseViewModel() {
             resourceProvider.getString(R.string.error_failed_comments)
 
         override var onRetryClicked = {
-            Log.i("[COMM. LOAD RETRY]", "Attempting to reload comments.")
+            Log.i("[RETRY: COMM. LOAD]", "Attempting to reload comments.")
             loadComments(articleId) }
     }
 
     var articleId: String? = null
-
     var uiState: MutableLiveData<ResultState> = MutableLiveData(ResultState.LoadingState)
 
     val commentList: ObservableArrayList<CommentViewModel> = ObservableArrayList()
@@ -52,7 +51,7 @@ class CommentListViewModel : BaseViewModel() {
                     commentList.addAll(list.map { CommentViewModel(it, ::loadReplies) })
                     uiState.postValue(ResultState.SuccessState)
                 }, { throwable ->
-                    Log.e("[COMM. LOADING FAILED]", throwable.message)
+                    Log.e("[ERROR COMM. LOADING]", throwable.message)
                     uiState.postValue(ResultState.ErrorState)
                 })
         }

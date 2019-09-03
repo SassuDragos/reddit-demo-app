@@ -1,7 +1,7 @@
 package com.sogard.data.datasources
 
 import android.content.Context
-import com.sogard.data.repositories.SharedPrefKeys.DEFAULT_FILE_NAME
+import com.sogard.data.datasources.SharedPrefKeys.DEFAULT_FILE_NAME
 
 
 //TODO: For the current scope, shared preferences is secure / good enough as a storage facility.

@@ -2,7 +2,7 @@ package com.sogard.data.apis
 
 import com.sogard.data.apis.AppConfiguration.REDDIT_PUBLIC_BASE_URL
 import com.sogard.data.apis.AppConfiguration.BASE_URL
-import com.sogard.data.repositories.SharedPrefKeys
+import com.sogard.data.datasources.SharedPrefKeys
 import com.sogard.data.datasources.SharedPreferencesHelper
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

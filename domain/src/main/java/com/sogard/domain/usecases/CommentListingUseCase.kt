@@ -9,6 +9,6 @@ import io.reactivex.Single
 class CommentListingUseCase(private val commentRepository: CommentRepository) {
 
     fun getComments(articleId: String): Single<List<Comment>> = commentRepository
-        .loadComments(CommentsPaginationParams(articleId, 100, 1))
+        .loadComments(CommentsPaginationParams(articleId, 50, 1))
         .applyIoScheduler()
 }
