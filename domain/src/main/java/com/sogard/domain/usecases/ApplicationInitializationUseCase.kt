@@ -3,14 +3,14 @@ package com.sogard.domain.usecases
 import com.sogard.domain.models.authentication.AuthenticationState
 import com.sogard.domain.models.article.ArticlePaginationParameters
 import com.sogard.domain.repositories.AuthenticationRepository
-import com.sogard.domain.repositories.PostRepository
+import com.sogard.domain.repositories.ArticleRepository
 import extensions.applyIoScheduler
 import io.reactivex.Completable
 import java.util.concurrent.TimeUnit
 
 class ApplicationInitializationUseCase(
     private val authenticationRepository: AuthenticationRepository,
-    private val postRepository: PostRepository
+    private val articleRepository: ArticleRepository
 ) {
 
     /** Delay the result a bit to ensure the splash screen is not disappearing too fast.*/
@@ -21,7 +21,7 @@ class ApplicationInitializationUseCase(
         )
 
     private fun preFetchPosts(): Completable =
-        Completable.fromSingle(postRepository.getTopArticles(
+        Completable.fromSingle(articleRepository.getTopArticles(
             ArticlePaginationParameters(
                 null,
                 0,

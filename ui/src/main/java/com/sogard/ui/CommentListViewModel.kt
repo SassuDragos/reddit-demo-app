@@ -18,6 +18,7 @@ sealed class ResultState(val flipperIndex: Int) {
     object SuccessState : ResultState(2)
 }
 
+//TODO: there is a bug with AS and I can't move this to the comments package.
 class CommentListViewModel : BaseViewModel() {
 
     private val resourceProvider: ResourceProvider by inject()
@@ -41,7 +42,7 @@ class CommentListViewModel : BaseViewModel() {
         .map(CommentViewModel::class.java, BR.viewModel, R.layout.item_comment)
 
     fun loadReplies(commentId: String) {
-
+        //TODO:
     }
 
     fun loadComments(articleId: String?) {

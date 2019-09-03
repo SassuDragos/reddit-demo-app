@@ -2,8 +2,7 @@ package com.sogard.ui.helpers
 
 import android.content.Context
 
-class ResourceProvider (val applicationContext: Context) {
+class ResourceProvider (private val applicationContext: Context) {
 
-
-    fun getString(stringIdentifier: Int) = applicationContext.resources.getString(stringIdentifier)
+    fun getString(stringIdentifier: Int): String = applicationContext.resources.getString(stringIdentifier)
 }

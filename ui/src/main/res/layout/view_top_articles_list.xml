@@ -26,9 +26,9 @@
             android:clipChildren="true"
             android:clipToPadding="false"
             app:dividerOrientation="@{DividerItemDecoration.VERTICAL}"
-            app:itemBinding="@{viewModel.postItemBinding}"
+            app:itemBinding="@{viewModel.articleItemBinding}"
             app:itemDecorationDrawable="@{@drawable/divider_space}"
-            app:items="@{viewModel.postList}"
+            app:items="@{viewModel.articleList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </FrameLayout>
 

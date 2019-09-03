@@ -8,7 +8,7 @@ import com.sogard.data.repositories.CommentRepositoryImpl
 import com.sogard.data.repositories.ArticleRepositoryImpl
 import com.sogard.domain.repositories.AuthenticationRepository
 import com.sogard.domain.repositories.CommentRepository
-import com.sogard.domain.repositories.PostRepository
+import com.sogard.domain.repositories.ArticleRepository
 import com.sogard.domain.usecases.ApplicationInitializationUseCase
 import com.sogard.domain.usecases.CommentListingUseCase
 import com.sogard.domain.usecases.TopArticleListingUseCase
@@ -34,7 +34,7 @@ val networkModule: Module = module {
 
 val repositoryModule: Module = module {
     single<CommentRepository> { CommentRepositoryImpl(commentsApi = get()) }
-    single<PostRepository> { ArticleRepositoryImpl(postApi = get()) }
+    single<ArticleRepository> { ArticleRepositoryImpl(postApi = get()) }
     single<AuthenticationRepository> {
         AuthenticationRepositoryImpl(
             sharedPrefHelper = get(),
@@ -45,7 +45,7 @@ val repositoryModule: Module = module {
 
 val useCaseModule: Module = module {
     single {
-        ApplicationInitializationUseCase(authenticationRepository = get(), postRepository = get())
+        ApplicationInitializationUseCase(authenticationRepository = get(), articleRepository = get())
     }
     single { TopArticleListingUseCase(articleRepository = get()) }
     single { CommentListingUseCase(commentRepository = get()) }

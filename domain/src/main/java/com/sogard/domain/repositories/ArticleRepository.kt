@@ -5,6 +5,6 @@ import com.sogard.domain.models.article.ArticlePaginationParameters
 import com.sogard.domain.models.article.Article
 import io.reactivex.Single
 
-interface PostRepository {
+interface ArticleRepository {
     fun getTopArticles(pagParam: ArticlePaginationParameters): Single<PaginatedResponse<List<Article>>>
 }

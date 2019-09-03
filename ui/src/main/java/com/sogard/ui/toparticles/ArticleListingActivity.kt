@@ -13,7 +13,7 @@ import com.sogard.ui.R
 import com.sogard.ui.TopArticlesViewModel
 import com.sogard.ui.databinding.ActivityHomeBinding
 import com.sogard.ui.generics.EndlessRecyclerViewScrollListener
-import kotlinx.android.synthetic.main.view_top_list.view.*
+import kotlinx.android.synthetic.main.view_top_articles_list.view.*
 
 
 class ArticleListingActivity : AppCompatActivity() {
@@ -31,12 +31,12 @@ class ArticleListingActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        //TODO Replace this EndlessRecyclerView with the Paging library flow
+        //TODO Replace this EndlessRecyclerView with the Paging library flow. This one is VERY inefficient.
         val recyclerView = binding.root.rv_posts
         binding.root.rv_posts.addOnScrollListener(object :
             EndlessRecyclerViewScrollListener(recyclerView.layoutManager as LinearLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-                viewModel.loadPosts()
+                viewModel.loadArticles()
             }
         })
 

@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <include
-            layout="@layout/view_top_list"
+            layout="@layout/view_top_articles_list"
             bind:viewModel="@{viewModel}" />
 
     </FrameLayout>

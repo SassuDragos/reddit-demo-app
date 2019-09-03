@@ -7,11 +7,11 @@ import com.sogard.data.models.getContent
 import com.sogard.domain.models.article.PaginatedResponse
 import com.sogard.domain.models.article.ArticlePaginationParameters
 import com.sogard.domain.models.article.Article
-import com.sogard.domain.repositories.PostRepository
+import com.sogard.domain.repositories.ArticleRepository
 import io.reactivex.Single
 
 
-class ArticleRepositoryImpl(private val postApi: PostApi) : PostRepository {
+class ArticleRepositoryImpl(private val postApi: PostApi) : ArticleRepository {
 
     override fun getTopArticles(pagParam: ArticlePaginationParameters): Single<PaginatedResponse<List<Article>>> =
         postApi.getTopPosts(pagParam.nextAnchor, pagParam.totalLoadedItems, pagParam.maxListSize)

@@ -6,7 +6,7 @@ import com.sogard.ui.helpers.NavigationDestination
 import com.sogard.ui.helpers.NavigationDestination.CommentsDestination
 import com.sogard.ui.helpers.NavigationDestination.UrlDestination
 
-class PostViewModel(
+class ArticleViewModel(
     article: Article,
     private val navigationListener: MutableLiveData<NavigationDestination>
 ) {
@@ -16,6 +16,6 @@ class PostViewModel(
     private val detailsUrl = article.detailsUrl
 
     fun onViewCommentsClicked() = navigationListener.postValue(CommentsDestination(id))
-    fun onPostClicked() = navigationListener.postValue(UrlDestination(detailsUrl))
+    fun onArticleClicked() = navigationListener.postValue(UrlDestination(detailsUrl))
 }
 
