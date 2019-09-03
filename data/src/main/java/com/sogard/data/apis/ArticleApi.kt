@@ -1,18 +1,16 @@
 package com.sogard.data.apis
 
-import com.sogard.data.models.DataWrapper
-import com.sogard.data.models.ListingDataWrapper
-import com.sogard.data.models.PostDAO
+import com.sogard.data.models.*
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface PostApi {
+interface ArticleApi {
 
     @GET("/top")
-    fun getTopPosts(
+    fun getTopArticles(
         @Query("after") nextElement: String?,
         @Query("count") totalElementsLoaded: Int,
         @Query("limit") maxListSize: Int
-    ): Single<DataWrapper<ListingDataWrapper<PostDAO>>>
+    ): Single<ListingWrapper<DataWrapper<ArticleDAO>>>
 }

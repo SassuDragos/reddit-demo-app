@@ -1,15 +1,18 @@
 package com.sogard.data.apis
 
-import com.sogard.data.apis.AppConfiguration.REDDIT_PUBLIC_BASE_URL
 import com.sogard.data.apis.AppConfiguration.BASE_URL
+import com.sogard.data.apis.AppConfiguration.REDDIT_PUBLIC_BASE_URL
 import com.sogard.data.datasources.SharedPrefKeys
 import com.sogard.data.datasources.SharedPreferencesHelper
+import com.sogard.data.models.*
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import okhttp3.logging.HttpLoggingInterceptor
-
 
 
 object AppConfiguration {
@@ -27,17 +30,30 @@ object AppConfiguration {
 //TODO: Make this class singleton
 class ApiServiceGenerator(sharedPrefHelper: SharedPreferencesHelper) {
 
-    private val loggingInterceptor = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY}
+    private val loggingInterceptor =
+        HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+
+    private val moshiClient = Moshi.Builder()
+        .add(
+            PolymorphicJsonAdapterFactory.of(DataWrapper::class.java, KEY_WRAPPER_TYPE)
+                .withSubtype(ListingWrapper::class.java, DataWrapperType.Listing.name)
+                .withSubtype(ArticleWrapper::class.java, DataWrapperType.t3.name)
+                .withSubtype(CommentWrapper::class.java, DataWrapperType.t1.name)
+                .withSubtype(MoreDataWrapper::class.java, DataWrapperType.more.name)
+        )
+        .add(KotlinJsonAdapterFactory())
+        .build()
+
     private val httpClient = OkHttpClient.Builder()
         .addInterceptor(AuthenticationInterceptor {
             //TODO: This is sub optimal. The token should be cached and the cache component should
             // be provided instead.
             sharedPrefHelper.getString(SharedPrefKeys.KEY_TOKEN) ?: ""
         })
-        .addInterceptor(loggingInterceptor);
+        .addInterceptor(loggingInterceptor)
 
     private val retrofitBuilder = Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshiClient))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 
     private val defaultRetrofit = retrofitBuilder

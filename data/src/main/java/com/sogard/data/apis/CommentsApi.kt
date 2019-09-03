@@ -1,9 +1,6 @@
 package com.sogard.data.apis
 
-import com.sogard.data.models.CommentDAO
-import com.sogard.data.models.DataWrapper
-import com.sogard.data.models.ListingDataWrapper
-import com.sogard.data.models.PostDAO
+import com.sogard.data.models.*
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,5 +13,5 @@ interface CommentsApi {
         @Path("articleId") articleId: String,
         @Query("limit") maxListSize: Int,
         @Query("depth") maxDepth: Int
-    ): Single<List<DataWrapper<ListingDataWrapper<CommentDAO>>>>
+    ): Single<List<ListingWrapper<DataWrapper<CoreRedditDAO>>>>
 }

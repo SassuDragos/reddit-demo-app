@@ -1,6 +1,7 @@
 package com.sogard.domain.models.article
 
-data class PaginatedResponse<T>(
-    val data: T,
+data class PaginatedArticleData(
+    val data: List<Article>,
     val nextPaginationAnchor: String
 )
+

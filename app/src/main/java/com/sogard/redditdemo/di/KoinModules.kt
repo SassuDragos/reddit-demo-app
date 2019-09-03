@@ -2,7 +2,7 @@ package com.sogard.redditdemo.di
 
 import com.sogard.data.apis.ApiServiceGenerator
 import com.sogard.data.apis.CommentsApi
-import com.sogard.data.apis.PostApi
+import com.sogard.data.apis.ArticleApi
 import com.sogard.data.repositories.AuthenticationRepositoryImpl
 import com.sogard.data.repositories.CommentRepositoryImpl
 import com.sogard.data.repositories.ArticleRepositoryImpl
@@ -27,7 +27,7 @@ private val API_GENERATOR = "API_GENERATOR"
 
 val networkModule: Module = module {
     single(named(API_GENERATOR)) { ApiServiceGenerator(get()) }
-    single { get<ApiServiceGenerator>(named(API_GENERATOR)).createService(PostApi::class.java) }
+    single { get<ApiServiceGenerator>(named(API_GENERATOR)).createService(ArticleApi::class.java) }
     single { get<ApiServiceGenerator>(named(API_GENERATOR)).createAuthenticationService() }
     single { get<ApiServiceGenerator>(named(API_GENERATOR)).createService(CommentsApi::class.java) }
 }
@@ -43,11 +43,12 @@ val repositoryModule: Module = module {
     }
 }
 
+//Note that in a larger pr
 val useCaseModule: Module = module {
     single {
         ApplicationInitializationUseCase(authenticationRepository = get(), articleRepository = get())
     }
-    single { TopArticleListingUseCase(articleRepository = get()) }
-    single { CommentListingUseCase(commentRepository = get()) }
+    factory { TopArticleListingUseCase(articleRepository = get()) }
+    factory { CommentListingUseCase(commentRepository = get()) }
 }
 

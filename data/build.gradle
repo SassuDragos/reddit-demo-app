@@ -34,7 +34,9 @@ dependencies {
 
     implementation("io.reactivex.rxjava2:rxkotlin:$rxkotlinVersion")
 
+    implementation "com.squareup.moshi:moshi:$moshiVersion"
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+    implementation("com.squareup.moshi:moshi-adapters:$moshiVersion")
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitMoshiConverterVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"

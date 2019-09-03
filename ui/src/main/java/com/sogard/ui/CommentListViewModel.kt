@@ -10,6 +10,7 @@ import com.sogard.ui.generics.ErrorHandler
 import com.sogard.ui.helpers.ResourceProvider
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import org.koin.core.inject
+import com.sogard.ui.R
 
 sealed class ResultState(val flipperIndex: Int) {
 
@@ -46,7 +47,7 @@ class CommentListViewModel : BaseViewModel() {
 
     fun loadComments(articleId: String?) {
         articleId?.let { id ->
-            commentListingUseCase.getComments(id)
+            commentListingUseCase.loadInitialComments(id)
                 .subscribe({ list ->
                     commentList.addAll(list.map { CommentViewModel(it, ::loadReplies) })
                     uiState.postValue(ResultState.SuccessState)
