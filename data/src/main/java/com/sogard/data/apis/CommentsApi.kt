@@ -12,10 +12,8 @@ import retrofit2.http.Query
 interface CommentsApi {
 
     @GET("/comments/{articleId}")
-    fun getComments(
+    fun getCommentsForPost(
         @Path("articleId") articleId: String,
-        @Query("after") nextElement: String?,
-        @Query("count") totalElementsLoaded: Int,
         @Query("limit") maxListSize: Int,
         @Query("depth") maxDepth: Int
     ): Single<List<DataWrapper<ListingDataWrapper<CommentDAO>>>>

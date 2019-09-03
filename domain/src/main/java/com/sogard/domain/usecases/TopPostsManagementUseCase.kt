@@ -1,5 +1,6 @@
 package com.sogard.domain.usecases
 
+import com.sogard.domain.models.PaginationParameters
 import com.sogard.domain.models.Post
 import com.sogard.domain.repositories.PostRepository
 import extensions.applyIoScheduler
@@ -13,7 +14,9 @@ class TopPostsManagementUseCase(private val postRepository: PostRepository) {
     fun getPosts(totalLoadedItems: Int): Single<List<Post>> {
         if (totalLoadedItems == 0) nextAnchor = null
 
-        return postRepository.getTopPosts(nextAnchor, totalLoadedItems, MAX_RESPONSE_SIZE)
+        val paginationParameters =
+            PaginationParameters(nextAnchor, totalLoadedItems, MAX_RESPONSE_SIZE)
+        return postRepository.getTopPosts(paginationParameters)
             .doOnSuccess { nextAnchor = it.nextPaginationAnchor }
             .map { paginatedResponse -> paginatedResponse.data }
             .applyIoScheduler()

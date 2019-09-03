@@ -19,7 +19,7 @@
 
         <ViewFlipper
             android:layout_gravity="center"
-            android:displayedChild="@{viewModel.flipperPosition}"
+            android:displayedChild="@{viewModel.uiState.flipperIndex}"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

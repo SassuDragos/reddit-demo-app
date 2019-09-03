@@ -1,6 +1,7 @@
 package com.sogard.domain.usecases
 
 import com.sogard.domain.models.AuthenticationState
+import com.sogard.domain.models.PaginationParameters
 import com.sogard.domain.repositories.AuthenticationRepository
 import com.sogard.domain.repositories.PostRepository
 import extensions.applyIoScheduler
@@ -14,10 +15,13 @@ class ApplicationInitializationUseCase(
 
     /** Delay the result a bit to ensure the splash screen is not disappearing too fast.*/
     fun initializeApplication(): Completable =
-        checkAuthentication().andThen(preFetchPosts()).applyIoScheduler().delay(500, TimeUnit.MILLISECONDS)
+        checkAuthentication().andThen(preFetchPosts()).applyIoScheduler().delay(
+            500,
+            TimeUnit.MILLISECONDS
+        )
 
     private fun preFetchPosts(): Completable =
-        Completable.fromSingle(postRepository.getTopPosts(null, 0, 15))
+        Completable.fromSingle(postRepository.getTopPosts(PaginationParameters(null, 0, 15)))
 
     //TODO: Discuss whether we want to abstract the token availability/validity at the repository level.
     private fun authenticate(): Completable = authenticationRepository.fetchToken()

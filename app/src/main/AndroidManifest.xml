@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.sogard.ui.CommentsActivity">
+        <activity android:name="com.sogard.ui.comments.CommentsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

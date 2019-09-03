@@ -11,6 +11,9 @@ import com.sogard.ui.topposts.PostViewModel
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import org.koin.core.inject
 
+//TODO: The splash screen and the top posts will to be in 2 separate viewModels / Views.
+// I decided to temporary inherit from the SplashViewModel as it allows me ensure that I am authenticated.
+
 class TopPostsViewModel : SplashViewModel() {
 
     private val topPostsManagementUseCase: TopPostsManagementUseCase by inject()

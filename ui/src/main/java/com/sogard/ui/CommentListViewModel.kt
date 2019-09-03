@@ -1,30 +1,40 @@
 package com.sogard.ui
 
-import androidx.core.content.ContextCompat
+import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
+import com.sogard.domain.usecases.CommentListingUseCase
 import com.sogard.ui.comments.CommentViewModel
 import com.sogard.ui.generics.BaseViewModel
 import com.sogard.ui.generics.ErrorHandler
 import com.sogard.ui.helpers.ResourceProvider
-import com.sogard.ui.topposts.PostViewModel
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import org.koin.core.inject
 
+sealed class ResultState(val flipperIndex: Int) {
 
-class CommentListViewModel: BaseViewModel() {
+    object LoadingState : ResultState(0)
+    object ErrorState : ResultState(1)
+    object SuccessState : ResultState(2)
+}
+
+class CommentListViewModel : BaseViewModel() {
 
     private val resourceProvider: ResourceProvider by inject()
+    private val commentListingUseCase: CommentListingUseCase by inject()
 
-    val errorHandler = object :ErrorHandler {
-        override val errorMessage: String = resourceProvider.getString(R.string.error_failed_comments)
+    val errorHandler = object : ErrorHandler {
+        override val errorMessage: String =
+            resourceProvider.getString(R.string.error_failed_comments)
 
-        override var onRetryClicked = {}
+        override var onRetryClicked = {
+            Log.i("[COMM. LOAD RETRY]", "Attempting to reload comments.")
+            loadComments(articleId) }
     }
 
     var articleId: String? = null
 
-    var flipperPosition: MutableLiveData<Int> = MutableLiveData(0)
+    var uiState: MutableLiveData<ResultState> = MutableLiveData(ResultState.LoadingState)
 
     val commentList: ObservableArrayList<CommentViewModel> = ObservableArrayList()
     val commentItemBinding = OnItemBindClass<CommentViewModel>()
@@ -35,8 +45,15 @@ class CommentListViewModel: BaseViewModel() {
     }
 
     fun loadComments(articleId: String?) {
-        articleId?.let {
-
+        articleId?.let { id ->
+            commentListingUseCase.getComments(id)
+                .subscribe({ list ->
+                    commentList.addAll(list.map { CommentViewModel(it, ::loadReplies) })
+                    uiState.postValue(ResultState.SuccessState)
+                }, { throwable ->
+                    Log.e("[COMM. LOADING FAILED]", throwable.message)
+                    uiState.postValue(ResultState.ErrorState)
+                })
         }
     }
 }
