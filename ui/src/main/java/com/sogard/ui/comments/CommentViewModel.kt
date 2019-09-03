@@ -1,6 +1,6 @@
 package com.sogard.ui.comments
 
-import com.sogard.domain.models.Comment
+import com.sogard.domain.models.comment.Comment
 
 
 class CommentViewModel(

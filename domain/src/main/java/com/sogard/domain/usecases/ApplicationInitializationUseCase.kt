@@ -1,7 +1,7 @@
 package com.sogard.domain.usecases
 
-import com.sogard.domain.models.AuthenticationState
-import com.sogard.domain.models.PaginationParameters
+import com.sogard.domain.models.authentication.AuthenticationState
+import com.sogard.domain.models.article.ArticlePaginationParameters
 import com.sogard.domain.repositories.AuthenticationRepository
 import com.sogard.domain.repositories.PostRepository
 import extensions.applyIoScheduler
@@ -21,7 +21,13 @@ class ApplicationInitializationUseCase(
         )
 
     private fun preFetchPosts(): Completable =
-        Completable.fromSingle(postRepository.getTopPosts(PaginationParameters(null, 0, 15)))
+        Completable.fromSingle(postRepository.getTopArticles(
+            ArticlePaginationParameters(
+                null,
+                0,
+                15
+            )
+        ))
 
     //TODO: Discuss whether we want to abstract the token availability/validity at the repository level.
     private fun authenticate(): Completable = authenticationRepository.fetchToken()

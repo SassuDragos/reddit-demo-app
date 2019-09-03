@@ -1,4 +1,4 @@
-package datasources
+package com.sogard.data.datasources
 
 import android.content.Context
 import com.sogard.data.repositories.SharedPrefKeys.DEFAULT_FILE_NAME

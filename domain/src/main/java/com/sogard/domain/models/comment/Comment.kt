@@ -1,4 +1,4 @@
-package com.sogard.domain.models
+package com.sogard.domain.models.comment
 
 data class ReplyActivitySummary(val totalReplies: Int,
                                 val id: String,

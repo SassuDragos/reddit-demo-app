@@ -1,9 +1,7 @@
 package com.sogard.domain.repositories
 
-import com.sogard.domain.models.Comment
-import com.sogard.domain.models.CommentsPaginationParams
-import com.sogard.domain.models.PaginatedResponse
-import com.sogard.domain.models.PaginationParameters
+import com.sogard.domain.models.comment.Comment
+import com.sogard.domain.models.comment.CommentsPaginationParams
 import io.reactivex.Single
 
 interface CommentRepository {

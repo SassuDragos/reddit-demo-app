@@ -1,5 +1,10 @@
 package com.sogard.domain
 
+/***
+ * This class will be used in cases when LiveData bridges the communication between UI <-> Domain /
+ * Domain <-> Data.
+ */
+//TODO:
 sealed class ResultState {
 
     /**

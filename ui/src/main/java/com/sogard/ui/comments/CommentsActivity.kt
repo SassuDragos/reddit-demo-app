@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
 import com.sogard.ui.CommentListViewModel
-import com.sogard.ui.NavigationKeys.ARTICLE_ID
+import com.sogard.ui.helpers.NavigationKeys.ARTICLE_ID
 import com.sogard.ui.R
 import com.sogard.ui.databinding.ActivityCommentsBinding
 import org.koin.core.KoinComponent

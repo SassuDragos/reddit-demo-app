@@ -1,4 +1,4 @@
-package com.sogard.data
+package com.sogard.data.apis
 
 import okhttp3.Interceptor
 import okhttp3.Response

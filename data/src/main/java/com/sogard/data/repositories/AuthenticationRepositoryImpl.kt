@@ -1,34 +1,35 @@
 package com.sogard.data.repositories
 
-import android.content.Context
-import com.sogard.data.AppConfiguration.DEFAULT_GRANT_TYPE
+import com.sogard.data.apis.AppConfiguration.DEFAULT_GRANT_TYPE
 import com.sogard.data.apis.AuthenticationApi
+import com.sogard.data.datasources.SharedPrefKeys.KEY_DEVICE_ID
+import com.sogard.data.datasources.SharedPrefKeys.KEY_TOKEN
+import com.sogard.data.datasources.SharedPrefKeys.KEY_TOKEN_EXPIRATION_TIME
 import com.sogard.data.models.AccessTokenDAO
-import com.sogard.data.repositories.SharedPrefKeys.KEY_DEVICE_ID
-import com.sogard.data.repositories.SharedPrefKeys.KEY_TOKEN
-import com.sogard.data.repositories.SharedPrefKeys.KEY_TOKEN_EXPIRATION_TIME
-import com.sogard.domain.models.AuthenticationState
+import com.sogard.domain.models.authentication.AuthenticationState
 import com.sogard.domain.repositories.AuthenticationRepository
-import datasources.SharedPreferencesHelper
+import com.sogard.data.datasources.SharedPreferencesHelper
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 import java.util.*
 
 
-object SharedPrefKeys {
-    const val DEFAULT_FILE_NAME = "mock_reddit_data"
-    const val KEY_TOKEN = "KEY_TOKEN"
-    const val KEY_TOKEN_EXPIRATION_TIME = "KEY_TOKEN_EXPIRATION_TIME"
-    const val KEY_DEVICE_ID = "KEY_DEVICE_ID"
-}
+
 
 class AuthenticationRepositoryImpl(
-    val sharedPrefHelper: SharedPreferencesHelper,
-    val authenticationApi: AuthenticationApi
+    private val sharedPrefHelper: SharedPreferencesHelper,
+    private val authenticationApi: AuthenticationApi
 ) : AuthenticationRepository {
 
+    //TODO: The subject is for further use, in case other elements of the app need to be notified when the token changes (e.g. user login)
+    // However, in the current state of the application, the use of the subject is not justified.
+
     private val authStateSubject: BehaviorSubject<AuthenticationState> = BehaviorSubject.create()
+
+    private val deviceId: String by lazy {
+        sharedPrefHelper.getString(KEY_DEVICE_ID) ?: createNewDeviceId()
+    }
 
     override fun getAuthenticationState(): Single<AuthenticationState> {
         if (!authStateSubject.hasValue()) {
@@ -42,9 +43,7 @@ class AuthenticationRepositoryImpl(
         return Single.just(authStateSubject.value)
     }
 
-    private val deviceId: String by lazy {
-        sharedPrefHelper.getString(KEY_DEVICE_ID) ?: createNewDeviceId()
-    }
+
 
     override fun fetchToken(): Completable {
         return Completable.fromSingle(

@@ -1,10 +1,9 @@
-package com.sogard.data
+package com.sogard.data.apis
 
-import com.sogard.data.AppConfiguration.REDDIT_PUBLIC_BASE_URL
-import com.sogard.data.AppConfiguration.BASE_URL
-import com.sogard.data.apis.AuthenticationApi
+import com.sogard.data.apis.AppConfiguration.REDDIT_PUBLIC_BASE_URL
+import com.sogard.data.apis.AppConfiguration.BASE_URL
 import com.sogard.data.repositories.SharedPrefKeys
-import datasources.SharedPreferencesHelper
+import com.sogard.data.datasources.SharedPreferencesHelper
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

@@ -1,4 +1,4 @@
-package com.sogard.domain.models
+package com.sogard.domain.models.authentication
 
 sealed class AuthenticationState {
     object NotAuthenticated : AuthenticationState()

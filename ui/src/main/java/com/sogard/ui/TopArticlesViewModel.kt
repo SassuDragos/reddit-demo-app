@@ -1,22 +1,19 @@
 package com.sogard.ui
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.util.Log
-import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.ObservableArrayList
-import com.sogard.domain.usecases.TopPostsManagementUseCase
-import com.sogard.ui.topposts.PostViewModel
+import com.sogard.domain.usecases.TopArticleListingUseCase
+import com.sogard.ui.toparticles.PostViewModel
+import com.sogard.ui.toparticles.SplashViewModel
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import org.koin.core.inject
 
 //TODO: The splash screen and the top posts will to be in 2 separate viewModels / Views.
 // I decided to temporary inherit from the SplashViewModel as it allows me ensure that I am authenticated.
 
-class TopPostsViewModel : SplashViewModel() {
+class TopArticlesViewModel : SplashViewModel() {
 
-    private val topPostsManagementUseCase: TopPostsManagementUseCase by inject()
+    private val topArticleListingUseCase: TopArticleListingUseCase by inject()
 
     val postList: ObservableArrayList<PostViewModel> = ObservableArrayList()
     val postItemBinding = OnItemBindClass<PostViewModel>()
@@ -27,7 +24,7 @@ class TopPostsViewModel : SplashViewModel() {
     }
 
     fun loadPosts() {
-        val subscription = topPostsManagementUseCase
+        val subscription = topArticleListingUseCase
             .getPosts(postList.size)
             .subscribe({ posts ->
                 val postVMList =

@@ -1,4 +1,4 @@
-package com.sogard.ui
+package com.sogard.ui.toparticles
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,19 +8,22 @@ import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sogard.ui.helpers.NavigationHandler
+import com.sogard.ui.R
+import com.sogard.ui.TopArticlesViewModel
 import com.sogard.ui.databinding.ActivityHomeBinding
 import com.sogard.ui.generics.EndlessRecyclerViewScrollListener
 import kotlinx.android.synthetic.main.view_top_list.view.*
 
 
-class HomeActivity : AppCompatActivity() {
+class ArticleListingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val viewModel =
             ViewModelProvider(this, SavedStateViewModelFactory(this.application, this)).get(
-                TopPostsViewModel::class.java
+                TopArticlesViewModel::class.java
             )
 
         val binding: ActivityHomeBinding =

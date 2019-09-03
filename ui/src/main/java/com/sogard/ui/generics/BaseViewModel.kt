@@ -2,11 +2,9 @@ package com.sogard.ui.generics
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sogard.ui.NavigationDestination
-import com.sogard.ui.helpers.ResourceProvider
+import com.sogard.ui.helpers.NavigationDestination
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 abstract class BaseViewModel : ViewModel(), KoinComponent {
     protected val subscriptions: CompositeDisposable = CompositeDisposable()

@@ -1,7 +1,7 @@
 package com.sogard.domain.usecases
 
-import com.sogard.domain.models.Comment
-import com.sogard.domain.models.CommentsPaginationParams
+import com.sogard.domain.models.comment.Comment
+import com.sogard.domain.models.comment.CommentsPaginationParams
 import com.sogard.domain.repositories.CommentRepository
 import extensions.applyIoScheduler
 import io.reactivex.Single

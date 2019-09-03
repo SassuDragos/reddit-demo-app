@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.sogard.ui.TopPostsViewModel" />
+            type="com.sogard.ui.TopArticlesViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
