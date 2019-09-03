@@ -11,14 +11,12 @@ import com.sogard.ui.topposts.PostViewModel
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import org.koin.core.inject
 
-interface PostInterface
-
 class TopPostsViewModel : SplashViewModel() {
 
     private val topPostsManagementUseCase: TopPostsManagementUseCase by inject()
 
-    val postList: ObservableArrayList<PostInterface> = ObservableArrayList()
-    val postItemBinding = OnItemBindClass<PostInterface>()
+    val postList: ObservableArrayList<PostViewModel> = ObservableArrayList()
+    val postItemBinding = OnItemBindClass<PostViewModel>()
         .map(PostViewModel::class.java, BR.viewModel, R.layout.item_post)
 
     init {

@@ -4,10 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.core.content.ContextCompat.startActivity
-import com.sogard.ui.NavigationKeys.POST_ID
+import com.sogard.ui.NavigationKeys.ARTICLE_ID
 
 object NavigationKeys {
-    const val POST_ID = "POST_ID"
+    const val ARTICLE_ID = "ARTICLE_ID"
 }
 
 sealed class NavigationDestination {
@@ -33,8 +33,9 @@ object NavigationHandler {
                 destination.url
             )
             is NavigationDestination.CommentsDestination -> {
-                val intent = Intent(currentActivity, CommentsActivity::class.java).apply {
-                    putExtra(POST_ID, destination.postId)
+                val intent = Intent(currentActivity, CommentsActivity::class.java)
+                intent.apply {
+                    putExtra(ARTICLE_ID, destination.postId)
                 }
                 startActivity(currentActivity, intent, null)
             }

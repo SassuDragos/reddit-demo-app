@@ -2,6 +2,7 @@ package com.sogard.ui
 
 import android.util.Log
 import com.sogard.domain.usecases.ApplicationInitializationUseCase
+import com.sogard.ui.generics.BaseViewModel
 import org.koin.core.inject
 
 open class SplashViewModel : BaseViewModel() {

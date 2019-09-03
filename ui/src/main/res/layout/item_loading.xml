@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="80dp"
-    android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/av_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_loading_status_text"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="loading_animation.json"
+            app:lottie_loop="true" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/av_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_loading_status_text"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="loading_animation.json"
-        app:lottie_loop="true" />
-
-</FrameLayout>
+    </FrameLayout>
+</layout>
