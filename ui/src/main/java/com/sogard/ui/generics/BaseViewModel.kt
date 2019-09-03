@@ -1,11 +1,12 @@
-package com.sogard.ui
+package com.sogard.ui.generics
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.sogard.ui.NavigationDestination
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.core.KoinComponent
 
-abstract class BaseViewModel() : ViewModel(), KoinComponent {
+abstract class BaseViewModel : ViewModel(), KoinComponent {
     protected val subscriptions: CompositeDisposable = CompositeDisposable()
 
     //TODO: Alternatively, we can (1) put the click listeners in the viewModel and use the view

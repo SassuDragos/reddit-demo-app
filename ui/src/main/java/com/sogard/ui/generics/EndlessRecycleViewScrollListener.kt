@@ -1,4 +1,4 @@
-package com.sogard.ui
+package com.sogard.ui.generics
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager

@@ -1,7 +1,5 @@
 package com.sogard.ui
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -11,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sogard.ui.databinding.ActivityHomeBinding
-import kotlinx.android.synthetic.main.view_top_posts.view.*
-
+import com.sogard.ui.generics.EndlessRecyclerViewScrollListener
+import kotlinx.android.synthetic.main.view_top_list.view.*
 
 
 class HomeActivity : AppCompatActivity() {

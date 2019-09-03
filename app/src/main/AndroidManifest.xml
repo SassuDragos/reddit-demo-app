@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sogard.redditdemo">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".MainApplication"
@@ -12,6 +13,14 @@
         android:theme="@style/AppTheme">
 
         <activity android:name="com.sogard.ui.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.sogard.ui.CommentsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

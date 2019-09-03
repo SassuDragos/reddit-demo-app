@@ -13,7 +13,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:id="@+id/container_top_posts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,12 +23,13 @@
             android:id="@+id/rv_posts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipChildren="true"
             android:clipToPadding="false"
             app:dividerOrientation="@{DividerItemDecoration.VERTICAL}"
             app:itemBinding="@{viewModel.postItemBinding}"
             app:itemDecorationDrawable="@{@drawable/divider_space}"
             app:items="@{viewModel.postList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
 </layout>

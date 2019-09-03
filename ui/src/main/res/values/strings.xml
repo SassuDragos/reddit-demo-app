@@ -2,4 +2,8 @@
     <string name="app_name">presenter</string>
     <string name="home_screen_app_title">Mock Reddit Application</string>
     <string name="loading_status_text">Fetching Data…</string>
+    <string name="btn_error_retry">Retry</string>
+    <string name="btn_show_replies">Show replies</string>
+
+    <string name="error_failed_comments">Failed to load comments. Please try again.</string>
 </resources>

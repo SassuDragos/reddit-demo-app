@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="androidx.recyclerview.widget.DividerItemDecoration" />
+
+        <variable
+            name="viewModel"
+            type="com.sogard.ui.CommentListViewModel" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/container_comments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_comments"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:clipToPadding="false"-->
+<!--            app:dividerOrientation="@{DividerItemDecoration.VERTICAL}"-->
+<!--            app:itemBinding="@{viewModel.commentItemBinding}"-->
+<!--            app:itemDecorationDrawable="@{@drawable/divider_space}"-->
+<!--            app:items="@{viewModel.commentList}"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
+    </FrameLayout>
+</layout>
+
