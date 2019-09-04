@@ -8,7 +8,7 @@ import com.sogard.domain.usecases.CommentListingUseCase
 import com.sogard.ui.BR
 import com.sogard.ui.R
 import com.sogard.ui.generics.BaseViewModel
-import com.sogard.ui.generics.ErrorHandler
+import com.sogard.ui.generics.ErrorUiHandler
 import com.sogard.ui.helpers.ResourceProvider
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import org.koin.core.inject
@@ -25,7 +25,7 @@ class CommentListViewModel(private val state: SavedStateHandle) : BaseViewModel(
     private val resourceProvider: ResourceProvider by inject()
     private val commentListingUseCase: CommentListingUseCase by inject()
 
-    val errorHandler = object : ErrorHandler {
+    val errorHandler = object : ErrorUiHandler {
 
         override val errorMessage: String =
             resourceProvider.getString(R.string.error_failed_comments)

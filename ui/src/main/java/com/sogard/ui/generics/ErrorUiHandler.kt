@@ -1,6 +1,6 @@
 package com.sogard.ui.generics
 
-interface ErrorHandler{
+interface ErrorUiHandler{
 
     val errorMessage: String
 
