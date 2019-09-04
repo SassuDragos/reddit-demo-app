@@ -1,18 +1,20 @@
-package com.sogard.ui.comments
+package com.sogard.ui.features.comments
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
-import com.sogard.ui.CommentListViewModel
-import com.sogard.ui.helpers.NavigationKeys.ARTICLE_ID
 import com.sogard.ui.R
 import com.sogard.ui.databinding.ActivityCommentsBinding
+import com.sogard.ui.helpers.NavigationKeys.ARTICLE_ID
 import org.koin.core.KoinComponent
 
 
 class CommentsActivity : AppCompatActivity(), KoinComponent {
+
+    //TODO: Save the article ID on saved instance state.
+    lateinit var articleId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,5 +37,4 @@ class CommentsActivity : AppCompatActivity(), KoinComponent {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
     }
-
 }

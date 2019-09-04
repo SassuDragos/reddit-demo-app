@@ -1,4 +1,4 @@
-package com.sogard.ui.toparticles
+package com.sogard.ui.features.toparticles
 
 import androidx.lifecycle.MutableLiveData
 import com.sogard.domain.models.article.Article

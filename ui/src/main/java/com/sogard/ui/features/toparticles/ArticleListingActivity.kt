@@ -1,4 +1,4 @@
-package com.sogard.ui.toparticles
+package com.sogard.ui.features.toparticles
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,11 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sogard.ui.helpers.NavigationHandler
 import com.sogard.ui.R
-import com.sogard.ui.TopArticlesViewModel
 import com.sogard.ui.databinding.ActivityHomeBinding
 import com.sogard.ui.generics.EndlessRecyclerViewScrollListener
 import kotlinx.android.synthetic.main.view_top_articles_list.view.*
-
 
 class ArticleListingActivity : AppCompatActivity() {
 
@@ -32,8 +30,8 @@ class ArticleListingActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         //TODO Replace this EndlessRecyclerView with the Paging library flow. This one is VERY inefficient.
-        val recyclerView = binding.root.rv_posts
-        binding.root.rv_posts.addOnScrollListener(object :
+        val recyclerView = binding.root.rv_articles
+        binding.root.rv_articles.addOnScrollListener(object :
             EndlessRecyclerViewScrollListener(recyclerView.layoutManager as LinearLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
                 viewModel.loadArticles()

@@ -15,5 +15,4 @@ class CommentListingUseCase(private val commentRepository: CommentRepository) {
         .loadComments(CommentsPaginationParams(articleId, 50, 1))
         .map { moreCommentsIdList.addAll(it.moreCommentIdList); it.data }
         .applyIoScheduler()
-
 }

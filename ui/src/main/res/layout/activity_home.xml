@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.sogard.ui.TopArticlesViewModel" />
+            type="com.sogard.ui.features.toparticles.TopArticlesViewModel" />
     </data>
 
     <FrameLayout

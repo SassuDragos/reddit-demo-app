@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.sogard.ui.TopArticlesViewModel" />
+            type="com.sogard.ui.features.toparticles.TopArticlesViewModel" />
 
         <import type="androidx.recyclerview.widget.DividerItemDecoration" />
 
@@ -22,7 +22,7 @@
         android:padding="16dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_posts"
+            android:id="@+id/rv_articles"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
