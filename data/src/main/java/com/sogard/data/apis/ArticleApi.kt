@@ -12,5 +12,5 @@ interface ArticleApi {
         @Query("after") nextElement: String?,
         @Query("count") totalElementsLoaded: Int,
         @Query("limit") maxListSize: Int
-    ): Single<ListingWrapper<DataWrapper<ArticleDAO>>>
+    ): Single<ListingWrapper<ArticleDAO>>
 }

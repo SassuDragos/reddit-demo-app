@@ -27,7 +27,7 @@ sealed class DataWrapper<T : CoreRedditDAO>(
     open val data: T
 )
 
-data class ListingWrapper<T>(override val data: ListingData<T>) :
+data class ListingWrapper<T: CoreRedditDAO>(override val data: ListingData<T>) :
     DataWrapper<ListingData<T>>(DataWrapperType.Listing, data)
 
 data class ArticleWrapper(override val data: ArticleDAO) :
@@ -40,7 +40,7 @@ data class MoreDataWrapper(override val data: MoreDataDAO) :
     DataWrapper<MoreDataDAO>(DataWrapperType.more, data)
 
 
-internal fun <T: CoreRedditDAO> ListingWrapper<DataWrapper<T>>.getContent(): List<T> {
+internal fun <T: CoreRedditDAO> ListingWrapper<T>.getContent(): List<T> {
     return this.data.children.map { it.data }
 }
 

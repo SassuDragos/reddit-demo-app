@@ -13,5 +13,5 @@ interface CommentsApi {
         @Path("articleId") articleId: String,
         @Query("limit") maxListSize: Int,
         @Query("depth") maxDepth: Int
-    ): Single<List<ListingWrapper<DataWrapper<CoreRedditDAO>>>>
+    ): Single<List<ListingWrapper<CoreRedditDAO>>>
 }

@@ -14,7 +14,7 @@ class CommentRepositoryImpl(private val commentsApi: CommentsApi) : CommentRepos
             .map { it[1] } // it[0] is the article associated to the comments and it[1] is the comment data
             .mapToPaginatedCommentData()
 
-    private fun Single<ListingWrapper<DataWrapper<CoreRedditDAO>>>.mapToPaginatedCommentData(): Single<PaginatedCommentData> =
+    private fun Single<ListingWrapper<CoreRedditDAO>>.mapToPaginatedCommentData(): Single<PaginatedCommentData> =
         this.map { wrapper ->
             val coreDAOList = wrapper.getContent()
             val commentList = coreDAOList.filterIsInstance<CommentDAO>().map { it.toComment() }
@@ -25,5 +25,5 @@ class CommentRepositoryImpl(private val commentsApi: CommentsApi) : CommentRepos
         }
 
     private fun CommentDAO.toComment(): Comment =
-        Comment(id, authorName, body, totalComments)
+        Comment(id, authorName, body, 100)
 }
