@@ -38,10 +38,10 @@ class ApiServiceGenerator(sharedPrefHelper: SharedPreferencesHelper) {
 
     private val moshiClient = Moshi.Builder()
         .add(PolymorphicJsonAdapterFactory.of(CoreRedditDAO::class.java, KEY_WRAPPER_TYPE)
-            .withSubtype(ArticleDAO::class.java, DataWrapperType.Listing.name)
-            .withSubtype(CommentDAO::class.java, DataWrapperType.t3.name)
-            .withSubtype(MoreDataDAO::class.java, DataWrapperType.t1.name)
-            .withSubtype(ListingData::class.java, DataWrapperType.more.name))
+            .withSubtype(ListingData::class.java, DataWrapperType.Listing.name)
+            .withSubtype(ArticleDAO::class.java, DataWrapperType.t3.name)
+            .withSubtype(CommentDAO::class.java, DataWrapperType.t1.name)
+            .withSubtype(MoreDataDAO::class.java, DataWrapperType.more.name))
         .add(
             PolymorphicJsonAdapterFactory.of(DataWrapper::class.java, KEY_WRAPPER_TYPE)
                 .withSubtype(ListingWrapper::class.java, DataWrapperType.Listing.name)
