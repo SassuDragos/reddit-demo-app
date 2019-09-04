@@ -38,8 +38,6 @@ class ArticleListingActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.navigationLiveData.observe(this, Observer { newDestination ->
-            NavigationHandler.goTo(newDestination, this)
-        })
+
     }
 }

@@ -23,17 +23,19 @@ class CommentsActivity : AppCompatActivity(), KoinComponent {
         val viewModel =
             ViewModelProvider(this, SavedStateViewModelFactory(this.application, this)).get(
                 CommentListViewModel::class.java
-            ).apply {
-                //TODO: Write a ViewModel Factory class that allows for providing custom constructor parameters.
-                // This will allow the viewModel to instantiate the articleId during construction.
-                // Consequently, articleId will no longer be nullable.
-                articleId = id
-                loadComments(articleId)
-            }
+            )
 
         val binding: ActivityCommentsBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_comments)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        viewModel.loadComments(articleId)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putString("ARTICLE_ID", articleId)
     }
 }
