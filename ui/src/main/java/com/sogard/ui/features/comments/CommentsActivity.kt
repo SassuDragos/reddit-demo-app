@@ -13,13 +13,12 @@ import org.koin.core.KoinComponent
 
 class CommentsActivity : AppCompatActivity(), KoinComponent {
 
-    //TODO: Save the article ID on saved instance state.
-    lateinit var articleId: String
+    private var articleId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val id = intent?.extras?.getString(ARTICLE_ID)
+        articleId = intent?.extras?.getString(ARTICLE_ID) ?: savedInstanceState?.getString("ARTICLE_ID")
 
         val viewModel =
             ViewModelProvider(this, SavedStateViewModelFactory(this.application, this)).get(

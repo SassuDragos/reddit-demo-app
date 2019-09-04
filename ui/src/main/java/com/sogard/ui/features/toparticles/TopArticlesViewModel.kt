@@ -5,8 +5,8 @@ import androidx.databinding.ObservableArrayList
 import com.sogard.domain.usecases.TopArticleListingUseCase
 import com.sogard.ui.BR
 import com.sogard.ui.R
-import com.sogard.ui.features.toparticles.ArticleViewModel
-import com.sogard.ui.features.toparticles.SplashViewModel
+import com.sogard.ui.features.splash.SplashViewModel
+import com.sogard.ui.generics.BaseViewModel
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import org.koin.core.inject
 
@@ -14,7 +14,7 @@ import org.koin.core.inject
 // I decided to temporary inherit from the SplashViewModel as it allows (more or less) to be authenticated.
 
 //TODO: there is a bug with AS and I can't move this to the top articles package.
-class TopArticlesViewModel : SplashViewModel() {
+class TopArticlesViewModel : BaseViewModel() {
 
     private val topArticleListingUseCase: TopArticleListingUseCase by inject()
 

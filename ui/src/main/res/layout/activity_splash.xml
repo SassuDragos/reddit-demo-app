@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
+
         <variable
             name="viewModel"
-            type="com.sogard.ui.features.toparticles.TopArticlesViewModel" />
+            type="com.sogard.ui.features.splash.SplashViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -45,6 +47,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_reddit_logo" />
 
-        <include layout="@layout/item_loading"/>
+        <include layout="@layout/item_loading" />
+
     </LinearLayout>
 </layout>
