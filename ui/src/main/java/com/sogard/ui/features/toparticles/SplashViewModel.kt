@@ -1,4 +1,4 @@
-package com.sogard.ui.toparticles
+package com.sogard.ui.features.toparticles
 
 import android.util.Log
 import com.sogard.domain.usecases.ApplicationInitializationUseCase

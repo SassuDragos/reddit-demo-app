@@ -5,7 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.core.content.ContextCompat.startActivity
 import com.sogard.ui.helpers.NavigationKeys.ARTICLE_ID
-import com.sogard.ui.comments.CommentsActivity
+import com.sogard.ui.features.comments.CommentsActivity
 
 object NavigationKeys {
     const val ARTICLE_ID = "ARTICLE_ID"

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.sogard.ui.toparticles.ArticleListingActivity">
+        <activity android:name="com.sogard.ui.features.toparticles.ArticleListingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.sogard.ui.comments.CommentsActivity">
+        <activity android:name="com.sogard.ui.features.comments.CommentsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

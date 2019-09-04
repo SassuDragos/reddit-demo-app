@@ -1,4 +1,4 @@
-package com.sogard.ui.comments
+package com.sogard.ui.features.comments
 
 import com.sogard.domain.models.comment.Comment
 

@@ -1,16 +1,17 @@
-package com.sogard.ui
+package com.sogard.ui.features.comments
 
 import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.sogard.domain.usecases.CommentListingUseCase
-import com.sogard.ui.comments.CommentViewModel
+import com.sogard.ui.BR
+import com.sogard.ui.R
 import com.sogard.ui.generics.BaseViewModel
 import com.sogard.ui.generics.ErrorHandler
 import com.sogard.ui.helpers.ResourceProvider
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import org.koin.core.inject
-import com.sogard.ui.R
 
 sealed class ResultState(val flipperIndex: Int) {
 
@@ -19,19 +20,20 @@ sealed class ResultState(val flipperIndex: Int) {
     object SuccessState : ResultState(2)
 }
 
-//TODO: there is a bug with AS and I can't move this file to the comments package.
-class CommentListViewModel : BaseViewModel() {
+class CommentListViewModel(private val state: SavedStateHandle) : BaseViewModel() {
 
     private val resourceProvider: ResourceProvider by inject()
     private val commentListingUseCase: CommentListingUseCase by inject()
 
     val errorHandler = object : ErrorHandler {
+
         override val errorMessage: String =
             resourceProvider.getString(R.string.error_failed_comments)
 
         override var onRetryClicked = {
             Log.i("[RETRY: COMM. LOAD]", "Attempting to reload comments.")
-            loadComments(articleId) }
+            loadComments(articleId)
+        }
     }
 
     var articleId: String? = null
@@ -57,4 +59,5 @@ class CommentListViewModel : BaseViewModel() {
                 })
         }
     }
+
 }

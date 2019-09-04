@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.sogard.ui.CommentListViewModel" />
+            type="com.sogard.ui.features.comments.CommentListViewModel" />
 
     </data>
 
@@ -32,7 +32,6 @@
             <include
                 layout="@layout/view_comment_list"
                 app:viewModel="@{viewModel}" />
-
 
         </ViewFlipper>
 
