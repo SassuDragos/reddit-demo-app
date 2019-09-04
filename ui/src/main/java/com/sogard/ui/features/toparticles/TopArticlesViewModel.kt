@@ -5,7 +5,6 @@ import androidx.databinding.ObservableArrayList
 import com.sogard.domain.usecases.TopArticleListingUseCase
 import com.sogard.ui.BR
 import com.sogard.ui.R
-import com.sogard.ui.features.splash.SplashViewModel
 import com.sogard.ui.generics.BaseViewModel
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import org.koin.core.inject

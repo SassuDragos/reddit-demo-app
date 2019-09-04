@@ -1,9 +1,8 @@
 package com.sogard.ui.generics
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sogard.ui.helpers.NavigationDestination
+import com.sogard.ui.helpers.NavigationAction
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.core.KoinComponent
 
@@ -16,7 +15,7 @@ abstract class BaseViewModel : ViewModel(), KoinComponent {
     //TODO: Alternatively, we can (1) put the click listeners in the viewModel and use the view
     //      to obtain the context or (2) we can create a generic subscription mechanism for every
     //      Fragment/Activity which is attached to a BaseViewModel
-    val navigationLiveData = MutableLiveData<NavigationDestination>()
+    val navigationLiveData = MutableLiveData<NavigationAction>()
 
     override fun onCleared() {
         super.onCleared()

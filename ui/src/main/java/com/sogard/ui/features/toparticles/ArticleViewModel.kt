@@ -2,20 +2,20 @@ package com.sogard.ui.features.toparticles
 
 import androidx.lifecycle.MutableLiveData
 import com.sogard.domain.models.article.Article
-import com.sogard.ui.helpers.NavigationDestination
-import com.sogard.ui.helpers.NavigationDestination.CommentsDestination
-import com.sogard.ui.helpers.NavigationDestination.UrlDestination
+import com.sogard.ui.helpers.NavigationAction
+import com.sogard.ui.helpers.NavigationAction.CommentsAction
+import com.sogard.ui.helpers.NavigationAction.UrlAction
 
 class ArticleViewModel(
     article: Article,
-    private val navigationListener: MutableLiveData<NavigationDestination>
+    private val navigationListener: MutableLiveData<NavigationAction>
 ) {
     val title = article.title
     val totalComments = article.totalCommentNumber
     val id = article.id
     private val detailsUrl = article.detailsUrl
 
-    fun onViewCommentsClicked() = navigationListener.postValue(CommentsDestination(id))
-    fun onArticleClicked() = navigationListener.postValue(UrlDestination(detailsUrl))
+    fun onViewCommentsClicked() = navigationListener.postValue(CommentsAction(id, true))
+    fun onArticleClicked() = navigationListener.postValue(UrlAction(detailsUrl))
 }
 

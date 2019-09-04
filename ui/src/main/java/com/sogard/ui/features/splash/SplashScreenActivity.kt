@@ -17,13 +17,14 @@ class SplashScreenActivity : NavigationAwareActivity<SplashViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(this, SavedStateViewModelFactory(this.application, this))
-            .get(SplashViewModel::class.java)
-
         val binding: ActivitySplashBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_splash)
         binding.viewModel = viewModel
 
         viewModel?.initializeAppData()
     }
+
+    override fun createViewModel(): SplashViewModel =
+        ViewModelProvider(this, SavedStateViewModelFactory(this.application, this))
+            .get(SplashViewModel::class.java)
 }

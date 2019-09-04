@@ -33,7 +33,7 @@ class CommentListViewModel(private val state: SavedStateHandle) : BaseViewModel(
     var articleId: String? = null
 
     init {
-        currentState.value = UIState.LoadingState
+        currentState.value = UIState.Loading
     }
 
     val commentList: ObservableArrayList<CommentViewModel> = ObservableArrayList()
@@ -49,10 +49,10 @@ class CommentListViewModel(private val state: SavedStateHandle) : BaseViewModel(
             commentListingUseCase.loadInitialComments(id)
                 .subscribe({ list ->
                     commentList.addAll(list.map { CommentViewModel(it, ::loadReplies) })
-                    currentState.postValue(UIState.SuccessState)
+                    currentState.postValue(UIState.Success)
                 }, { throwable ->
                     Log.e("[ERROR COMM. LOADING]", throwable.message)
-                    currentState.postValue(UIState.ErrorState)
+                    currentState.postValue(UIState.Error)
                 })
         }
     }
