@@ -17,8 +17,8 @@ open class SplashViewModel : BaseViewModel() {
     private val appInitUseCase: ApplicationInitializationUseCase by inject()
     
     fun initializeAppData() {
-        val subscription = appInitUseCase
-            .initializeApplication()
+        val subscription = appInitUseCase.initializeApplication()
+            .doOnSubscribe {  }
             .subscribe({
                 Log.i(SUBSCRIPTION_SUCCESS, "APP Successfully Initialized")
             }, {

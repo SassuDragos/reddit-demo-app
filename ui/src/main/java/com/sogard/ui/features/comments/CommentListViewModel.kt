@@ -2,23 +2,17 @@ package com.sogard.ui.features.comments
 
 import android.util.Log
 import androidx.databinding.ObservableArrayList
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.sogard.domain.usecases.CommentListingUseCase
 import com.sogard.ui.BR
 import com.sogard.ui.R
 import com.sogard.ui.generics.BaseViewModel
 import com.sogard.ui.generics.ErrorUiHandler
+import com.sogard.ui.generics.UIState
 import com.sogard.ui.helpers.ResourceProvider
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import org.koin.core.inject
 
-sealed class ResultState(val flipperIndex: Int) {
-
-    object LoadingState : ResultState(0)
-    object ErrorState : ResultState(1)
-    object SuccessState : ResultState(2)
-}
 
 class CommentListViewModel(private val state: SavedStateHandle) : BaseViewModel() {
 
@@ -37,7 +31,10 @@ class CommentListViewModel(private val state: SavedStateHandle) : BaseViewModel(
     }
 
     var articleId: String? = null
-    var uiState: MutableLiveData<ResultState> = MutableLiveData(ResultState.LoadingState)
+
+    init {
+        currentState.value = UIState.LoadingState
+    }
 
     val commentList: ObservableArrayList<CommentViewModel> = ObservableArrayList()
     val commentItemBinding = OnItemBindClass<CommentViewModel>()
@@ -52,10 +49,10 @@ class CommentListViewModel(private val state: SavedStateHandle) : BaseViewModel(
             commentListingUseCase.loadInitialComments(id)
                 .subscribe({ list ->
                     commentList.addAll(list.map { CommentViewModel(it, ::loadReplies) })
-                    uiState.postValue(ResultState.SuccessState)
+                    currentState.postValue(UIState.SuccessState)
                 }, { throwable ->
                     Log.e("[ERROR COMM. LOADING]", throwable.message)
-                    uiState.postValue(ResultState.ErrorState)
+                    currentState.postValue(UIState.ErrorState)
                 })
         }
     }
