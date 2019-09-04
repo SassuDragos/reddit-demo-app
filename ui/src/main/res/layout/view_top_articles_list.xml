@@ -17,13 +17,14 @@
         android:id="@+id/container_top_posts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:clipChildren="false"
         android:padding="16dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_posts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipChildren="true"
             android:clipToPadding="false"
             app:dividerOrientation="@{DividerItemDecoration.VERTICAL}"
             app:itemBinding="@{viewModel.articleItemBinding}"
