@@ -11,10 +11,10 @@ import com.sogard.domain.repositories.ArticleRepository
 import io.reactivex.Single
 
 
-class ArticleRepositoryImpl(private val postApi: ArticleApi) : ArticleRepository {
+class ArticleRepositoryImpl(private val articleApi: ArticleApi) : ArticleRepository {
 
     override fun getTopArticles(pagParam: ArticlePaginationParameters): Single<PaginatedArticleData> =
-        postApi.getTopArticles(pagParam.nextAnchor, pagParam.totalLoadedItems, pagParam.maxListSize)
+        articleApi.getTopArticles(pagParam.nextAnchor, pagParam.totalLoadedItems, pagParam.maxListSize)
             .map { wrapper ->
 
                 //TODO: create a Mapper class that handles domain <-> ui and domain <-> data mapping
