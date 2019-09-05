@@ -4,10 +4,10 @@ import com.sogard.data.apis.ApiServiceGenerator
 import com.sogard.data.apis.ArticleApi
 import com.sogard.data.apis.CommentsApi
 import com.sogard.data.datasources.SharedPreferencesHelper
+import com.sogard.data.network.TokenManager
 import com.sogard.data.repositories.ArticleRepositoryImpl
 import com.sogard.data.repositories.AuthenticationRepositoryImpl
 import com.sogard.data.repositories.CommentRepositoryImpl
-import com.sogard.data.repositories.TokenManager
 import com.sogard.domain.repositories.ArticleRepository
 import com.sogard.domain.repositories.AuthenticationRepository
 import com.sogard.domain.repositories.CommentRepository
@@ -51,7 +51,7 @@ val repositoryModule: Module = module {
     }
 }
 
-//Note that in a larger pr
+
 val useCaseModule: Module = module {
     single {
         ApplicationInitializationUseCase(

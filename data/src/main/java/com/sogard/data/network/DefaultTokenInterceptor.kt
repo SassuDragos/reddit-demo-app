@@ -1,6 +1,6 @@
-package com.sogard.data.apis
+package com.sogard.data.network
 
-import com.sogard.data.repositories.TokenManager
+import com.sogard.data.apis.AppConfiguration
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
@@ -22,7 +22,7 @@ abstract class BaseAuthenticationInterceptor : Interceptor {
         val token = if (test == 3) activeToken + 55 else activeToken
         val builder = original.newBuilder()
             .header("Authorization", token)
-        test ++
+        test++
         val request = builder.build()
         return chain.proceed(request)
     }

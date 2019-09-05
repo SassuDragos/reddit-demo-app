@@ -12,6 +12,7 @@ import com.sogard.data.datasources.SharedPrefKeys.KEY_DEVICE_ID
 import com.sogard.data.datasources.SharedPrefKeys.KEY_TOKEN
 import com.sogard.data.datasources.SharedPreferencesHelper
 import com.sogard.data.models.AccessTokenDAO
+import com.sogard.data.network.TokenManager
 import com.sogard.data.workers.RefreshTokenWorker
 import com.sogard.domain.models.authentication.AuthenticationState
 import com.sogard.domain.models.authentication.AuthenticationState.Authenticated
@@ -25,16 +26,6 @@ import java.util.concurrent.TimeUnit
 
 
 data class TokenData(val formattedToken: String?)
-
-class TokenManager(sharedPrefHelper: SharedPreferencesHelper) {
-
-    val tokenSubject: BehaviorSubject<TokenData> by lazy {
-        val formattedToken = sharedPrefHelper.getString(KEY_TOKEN)
-
-        BehaviorSubject.create<TokenData>().apply { onNext(TokenData(formattedToken)) }
-    }
-}
-
 
 class AuthenticationRepositoryImpl(
     private val sharedPrefHelper: SharedPreferencesHelper,

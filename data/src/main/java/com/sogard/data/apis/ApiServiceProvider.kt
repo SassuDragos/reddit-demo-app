@@ -3,14 +3,14 @@ package com.sogard.data.apis
 import com.sogard.data.apis.AppConfiguration.BASE_URL
 import com.sogard.data.apis.AppConfiguration.REDDIT_PUBLIC_BASE_URL
 import com.sogard.data.models.*
-import com.sogard.data.repositories.TokenManager
-import com.sogard.domain.models.authentication.AuthenticationState
+import com.sogard.data.network.AuthorizationServiceTokenInterceptor
+import com.sogard.data.network.DefaultTokenInterceptor
+import com.sogard.data.network.RedditAuthenticator
+import com.sogard.data.network.TokenManager
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import io.reactivex.Completable
 import io.reactivex.Single
-import io.reactivex.subjects.BehaviorSubject
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -30,11 +30,7 @@ object AppConfiguration {
     const val BASIC_AUTH_APP_TOKEN = "Basic YjVDYTNRVDRfWHh0ZlE6"
 }
 
-//TODO: Make this class singleton
-class ApiServiceGenerator(
-    authenticationCall: () -> Single<String>,
-    tokenManager: TokenManager
-) {
+class ApiServiceGenerator(authenticationCall: () -> Single<String>, tokenManager: TokenManager) {
 
     private val loggingInterceptor =
         HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
@@ -58,7 +54,7 @@ class ApiServiceGenerator(
         .build()
 
     private val httpClient = OkHttpClient.Builder()
-        .authenticator(RedditAuthenticator(authenticationCall, tokenManager))
+        .authenticator(RedditAuthenticator(authenticationCall))
         .addInterceptor(DefaultTokenInterceptor(tokenManager))
         .addInterceptor(loggingInterceptor)
 
