@@ -33,6 +33,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation("io.reactivex.rxjava2:rxkotlin:$rxkotlinVersion")
+    implementation "androidx.work:work-rxjava2:$workVersion"
 
     implementation "com.squareup.moshi:moshi:$moshiVersion"
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
@@ -41,6 +42,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
     implementation("com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion")
+
 
     implementation project(path: ':domain')
 

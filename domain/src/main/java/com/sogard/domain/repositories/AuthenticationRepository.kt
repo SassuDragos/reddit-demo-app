@@ -9,4 +9,6 @@ interface AuthenticationRepository {
     fun fetchToken(): Completable
 
     fun getAuthenticationState(): Single<AuthenticationState>
+
+    fun startTokenRefreshingWorker()
 }

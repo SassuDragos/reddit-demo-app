@@ -33,10 +33,11 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+
     implementation "androidx.core:core-ktx:$corektxVersion"
 
     implementation "org.koin:koin-android:$koinVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlinVersion"
 
     implementation project(path: ':ui')
     implementation project(path: ':data')

@@ -19,6 +19,7 @@ class ApplicationInitializationUseCase(
             .andThen(preFetchPosts())
             .applyIoScheduler()
             .delay(500, TimeUnit.MILLISECONDS)
+            .doOnComplete { authenticationRepository.startTokenRefreshingWorker() }
 
     private fun preFetchPosts(): Completable =
         Completable.fromSingle(
