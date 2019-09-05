@@ -21,6 +21,7 @@ class ApplicationInitializationUseCase(
             .delay(500, TimeUnit.MILLISECONDS)
             .doOnComplete { authenticationRepository.startTokenRefreshingWorker() }
 
+    //TODO: There is no cashing mechanism yet. This call will serve for future use.
     private fun preFetchPosts(): Completable =
         Completable.fromSingle(
             articleRepository.getTopArticles(
@@ -44,4 +45,6 @@ class ApplicationInitializationUseCase(
                     authenticate()
                 }
             }
+
+
 }

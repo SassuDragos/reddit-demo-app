@@ -2,46 +2,51 @@ package com.sogard.data.apis
 
 import com.sogard.data.apis.AppConfiguration.BASE_URL
 import com.sogard.data.apis.AppConfiguration.REDDIT_PUBLIC_BASE_URL
-import com.sogard.data.datasources.SharedPrefKeys
-import com.sogard.data.datasources.SharedPreferencesHelper
 import com.sogard.data.models.*
-import com.squareup.moshi.*
+import com.sogard.data.repositories.TokenManager
+import com.sogard.domain.models.authentication.AuthenticationState
+import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import io.reactivex.Completable
+import io.reactivex.Single
+import io.reactivex.subjects.BehaviorSubject
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import com.squareup.moshi.JsonAdapter
-
-
 
 
 object AppConfiguration {
     //TODO: These could be defined in build/flavor config.
-    val BASE_URL: String = "https://oauth.reddit.com"
-    val REDDIT_PUBLIC_BASE_URL = "https://www.reddit.com"
+    const val BASE_URL: String = "https://oauth.reddit.com"
+    const val REDDIT_PUBLIC_BASE_URL = "https://www.reddit.com"
 
-    val DEFAULT_GRANT_TYPE = "https://oauth.reddit.com/grants/installed_client"
+    const val DEFAULT_GRANT_TYPE = "https://oauth.reddit.com/grants/installed_client"
 
     //TODO: This token should be encrypted and saved in a local storage. It can be easily hacked with reverse
     // engineering techniques. For the scope of this app (at least at this point), security is not central.
-    val BASIC_AUTH_APP_TOKEN = "Basic YjVDYTNRVDRfWHh0ZlE6"
+    const val BASIC_AUTH_APP_TOKEN = "Basic YjVDYTNRVDRfWHh0ZlE6"
 }
 
 //TODO: Make this class singleton
-class ApiServiceGenerator(sharedPrefHelper: SharedPreferencesHelper) {
+class ApiServiceGenerator(
+    authenticationCall: () -> Single<String>,
+    tokenManager: TokenManager
+) {
 
     private val loggingInterceptor =
-        HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+        HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
 
     private val moshiClient = Moshi.Builder()
-        .add(PolymorphicJsonAdapterFactory.of(CoreRedditDAO::class.java, KEY_WRAPPER_TYPE)
-            .withSubtype(ListingData::class.java, DataWrapperType.Listing.name)
-            .withSubtype(ArticleDAO::class.java, DataWrapperType.t3.name)
-            .withSubtype(CommentDAO::class.java, DataWrapperType.t1.name)
-            .withSubtype(MoreDataDAO::class.java, DataWrapperType.more.name))
+        .add(
+            PolymorphicJsonAdapterFactory.of(CoreRedditDAO::class.java, KEY_WRAPPER_TYPE)
+                .withSubtype(ListingData::class.java, DataWrapperType.Listing.name)
+                .withSubtype(ArticleDAO::class.java, DataWrapperType.t3.name)
+                .withSubtype(CommentDAO::class.java, DataWrapperType.t1.name)
+                .withSubtype(MoreDataDAO::class.java, DataWrapperType.more.name)
+        )
         .add(
             PolymorphicJsonAdapterFactory.of(DataWrapper::class.java, KEY_WRAPPER_TYPE)
                 .withSubtype(ListingWrapper::class.java, DataWrapperType.Listing.name)
@@ -53,11 +58,8 @@ class ApiServiceGenerator(sharedPrefHelper: SharedPreferencesHelper) {
         .build()
 
     private val httpClient = OkHttpClient.Builder()
-        .addInterceptor(AuthenticationInterceptor {
-            //TODO: This is sub optimal. The token should be cached and the cache component should
-            // be provided instead.
-            sharedPrefHelper.getString(SharedPrefKeys.KEY_TOKEN) ?: ""
-        })
+        .authenticator(RedditAuthenticator(authenticationCall, tokenManager))
+        .addInterceptor(DefaultTokenInterceptor(tokenManager))
         .addInterceptor(loggingInterceptor)
 
     private val retrofitBuilder = Retrofit.Builder()
@@ -71,13 +73,13 @@ class ApiServiceGenerator(sharedPrefHelper: SharedPreferencesHelper) {
 
     fun createAuthenticationService(): AuthenticationApi {
         val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(AuthenticationInterceptor { AppConfiguration.BASIC_AUTH_APP_TOKEN })
+            .addInterceptor(AuthorizationServiceTokenInterceptor())
             .addInterceptor(loggingInterceptor)
             .build()
 
         val authenticationRetrofit = retrofitBuilder
-            .baseUrl(REDDIT_PUBLIC_BASE_URL)
             .client(okHttpClient)
+            .baseUrl(REDDIT_PUBLIC_BASE_URL)
             .build()
 
         return authenticationRetrofit.create(AuthenticationApi::class.java)
