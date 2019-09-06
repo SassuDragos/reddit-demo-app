@@ -11,7 +11,7 @@ The project started as an interview challenge. The app aims to use most of the s
   - CLEAN architecture (without interactors)
   - Reddit API integration
 
-Note: The application does not focus on design practices and esthetics. 
+Note: The application does not focus on UX practices and esthetics. 
 
 [SCOPE and REQUIREMENTS]
 
