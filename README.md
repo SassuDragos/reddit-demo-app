@@ -2,6 +2,14 @@
 Demo project show casing basic know-how of Android expertise. 
 
 The project started as an interview challenge. The app aims to use most of the state of the art practices in Android development.
+  - Kotlin
+  - RxJava2 (RxKotlin)
+  - DI with Koin
+  - Retrofit + OkHttp + Moshi
+  - Databinding
+  - WorkManager
+  - CLEAN architecture (without interactors)
+  - Reddit API integration
 
 Note: The application does not focus on design practices and esthetics. 
 
