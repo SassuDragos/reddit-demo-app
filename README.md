@@ -8,7 +8,7 @@ The project started as an interview challenge. The app aims to use most of the s
   - Retrofit + OkHttp + Moshi
   - Databinding
   - WorkManager
-  - CLEAN architecture (without interactors)
+  - CLEAN architecture (without interactors) with MVVM
   - Reddit API integration
 
 Note: The application does not focus on UX practices and esthetics. 
