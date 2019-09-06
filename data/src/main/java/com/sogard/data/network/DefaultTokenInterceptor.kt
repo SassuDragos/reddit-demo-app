@@ -1,40 +1,42 @@
 package com.sogard.data.network
 
-import com.sogard.data.apis.AppConfiguration
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
 
-const val UNAUTHENTICATED_TOKEN = "Bearer "
+internal const val UNAUTHENTICATED_TOKEN = "Bearer "
 
+/**
+ *  Abstract Interceptor class in charge with adding an [activeToken] authorization parameter to
+ *  every intercepted request.
+ */
 abstract class BaseAuthenticationInterceptor : Interceptor {
     abstract var activeToken: String
-
-    companion object {
-        var test = 0
-    }
-
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
 
-        val token = if (test == 3) activeToken + 55 else activeToken
         val builder = original.newBuilder()
-            .header("Authorization", token)
-        test++
-        val request = builder.build()
-        return chain.proceed(request)
+            .header("Authorization", activeToken)
+
+        return chain.proceed(builder.build())
     }
 }
 
 /**
- * The interceptor provides the Basic Auth token required to do Authorization requests.
- * */
+ *  A subclass of BaseAuthenticationInterceptor configured with the Basic Auth Token.
+ */
 class AuthorizationServiceTokenInterceptor : BaseAuthenticationInterceptor() {
-    override var activeToken: String = AppConfiguration.BASIC_AUTH_APP_TOKEN
+    override var activeToken: String = AppNetworkConfiguration.BASIC_AUTH_APP_TOKEN
 }
 
+/**
+ *  A subclass of BaseAuthenticationInterceptor which ensures that every request has the latest available
+ *  token.
+ *
+ *  [tokenManager]:  Token provider.
+ * */
 class DefaultTokenInterceptor(tokenManager: TokenManager) :
     BaseAuthenticationInterceptor() {
 

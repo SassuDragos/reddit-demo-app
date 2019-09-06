@@ -8,7 +8,7 @@ import okhttp3.Route
 
 /**
  * An OKHttp Authenticator that refreshes the OAuth token for those requests that fail due to
- * Unauthorized access reasons.
+ * Unauthorized access (401) reasons.
  * */
 class RedditAuthenticator(private val authenticationCall: () -> Single<String>) : Authenticator {
 

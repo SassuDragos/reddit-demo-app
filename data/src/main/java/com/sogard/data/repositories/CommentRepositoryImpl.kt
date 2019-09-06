@@ -8,12 +8,24 @@ import com.sogard.domain.models.comment.PaginatedCommentData
 import com.sogard.domain.repositories.CommentRepository
 import io.reactivex.Single
 
+/**
+* Implementation of the CommentRepository.
+* */
 class CommentRepositoryImpl(private val commentsApi: CommentsApi) : CommentRepository {
+
+    /**
+     * Method that loads a list of comments using some configuration data.
+     * NOTE: the API result contains a list with 2 (-? no documentation found) objects: the source article
+     * and a wrapped list of comments.
+     * */
     override fun loadComments(param: CommentsPaginationParams): Single<PaginatedCommentData> =
-        commentsApi.getCommentsForPost(param.articleId, param.maxListSize, param.maxDepth)
+        commentsApi.getCommentsForArticle(param.articleId, param.maxListSize, param.maxDepth)
             .map { it[1] } // it[0] is the article associated to the comments and it[1] is the comment data
             .mapToPaginatedCommentData()
 
+    /**
+     * Every list of comments returned by the server can contain a [MoreDataDAO] object.
+     */
     private fun Single<ListingWrapper<CoreRedditDAO>>.mapToPaginatedCommentData(): Single<PaginatedCommentData> =
         this.map { wrapper ->
             val coreDAOList = wrapper.getContent()
