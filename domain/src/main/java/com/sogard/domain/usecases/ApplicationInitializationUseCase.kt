@@ -33,9 +33,9 @@ class ApplicationInitializationUseCase(
             )
         )
 
-    //TODO: Discuss whether we want to abstract the token availability/validity at the repository level.
     private fun authenticate(): Completable = authenticationRepository.fetchToken()
 
+    //TODO: Discuss whether we want to abstract the token availability/validity at the repository level.
     private fun checkAuthentication(): Completable =
         authenticationRepository.getAuthenticationState()
             .flatMapCompletable { state ->
