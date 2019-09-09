@@ -6,7 +6,7 @@ import com.sogard.ui.features.splash.LoggerTags.SUBSCRIPTION_ERROR
 import com.sogard.ui.features.splash.LoggerTags.SUBSCRIPTION_SUCCESS
 import com.sogard.ui.generics.BaseViewModel
 import com.sogard.ui.generics.UIState
-import com.sogard.ui.helpers.NavigationAction
+import com.sogard.ui.generics.navigation.NavigationAction
 import org.koin.core.inject
 
 object LoggerTags {

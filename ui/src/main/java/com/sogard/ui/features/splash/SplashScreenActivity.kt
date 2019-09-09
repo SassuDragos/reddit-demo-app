@@ -10,6 +10,9 @@ import com.sogard.ui.generics.navigation.NavigationAwareActivity
 import com.sogard.ui.generics.navigation.NavigationResolver
 
 
+//TODO: In the current application setup the SplashScreenActivity has no real use. However, after implementing
+//      a cache mechanism, it will allow for a better experience while pre-loading relevant app data.
+
 class SplashScreenActivity : NavigationAwareActivity<SplashViewModel>() {
 
     override fun getNavigationResolver() = NavigationResolver(this)

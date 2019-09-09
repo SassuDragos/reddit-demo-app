@@ -8,7 +8,7 @@ import com.sogard.ui.R
 import com.sogard.ui.databinding.ActivityCommentsBinding
 import com.sogard.ui.generics.navigation.NavigationAwareActivity
 import com.sogard.ui.generics.navigation.NavigationResolver
-import com.sogard.ui.helpers.NavigationKeys.ARTICLE_ID
+import com.sogard.ui.generics.navigation.NavigationKeys.ARTICLE_ID
 import org.koin.core.KoinComponent
 
 class CommentsActivity : NavigationAwareActivity<CommentListViewModel>(), KoinComponent {
@@ -39,7 +39,5 @@ class CommentsActivity : NavigationAwareActivity<CommentListViewModel>(), KoinCo
             CommentListViewModel::class.java
         )
 
-
     override fun getNavigationResolver() = NavigationResolver(this)
-
 }

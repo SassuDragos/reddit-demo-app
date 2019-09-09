@@ -1,31 +1,45 @@
-package com.sogard.ui.helpers
+package com.sogard.ui.generics.navigation
 
 import android.app.Activity
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NO_HISTORY
 import android.net.Uri
 import androidx.core.content.ContextCompat.startActivity
 import com.sogard.ui.features.comments.CommentsActivity
 import com.sogard.ui.features.toparticles.ArticleListingActivity
-import com.sogard.ui.helpers.NavigationKeys.ARTICLE_ID
+import com.sogard.ui.generics.navigation.NavigationKeys.ARTICLE_ID
 
+/** Keys used to pass data between navigation elements*/
 object NavigationKeys {
     const val ARTICLE_ID = "ARTICLE_ID"
 }
 
+/** Actions used for describing the navigation between application screens.*/
 sealed class NavigationAction {
+    /** Generic Action describing the navigation to an Activity destination. */
+    abstract class ActivityAction(val keepCurrentInBackStack: Boolean) : NavigationAction()
 
+    /** Generic Action describing the navigation to an Activity destination. */
+    class ArticleListAction(keepCurrentInBackStack: Boolean) :
+        ActivityAction(keepCurrentInBackStack)
+
+    /** Action describing the navigation to the Comments Activity. */
+    class CommentsAction(val postId: String, keepCurrentInBackStack: Boolean) :
+        ActivityAction(keepCurrentInBackStack)
+
+    /** Action describing the navigation to an URL destination. */
     class UrlAction(val url: String) : NavigationAction()
-
-    abstract class ActivityAction(val keepCurrentInBackStack: Boolean): NavigationAction()
-    class ArticleListAction(keepCurrentInBackStack: Boolean) : ActivityAction(keepCurrentInBackStack)
-    class CommentsAction(val postId: String, keepCurrentInBackStack: Boolean) : ActivityAction(keepCurrentInBackStack)
 }
 
-//TODO: This class is not ideal. The Android Navigation Graph should be explored for scalability purposes.
 
+/**
+ * Static Class handling the app navigation.
+
+TODO 1: The NavigationAction and the NavigationHandler should be separated in different files once they grow in size.
+TODO 2: This class is not ideal. The Android Navigation Graph should be explored for scalability purposes.
+ **/
 object NavigationHandler {
 
+    /** Start a new activity with with a website URI. */
     private fun openUrl(currentActivity: Activity, url: String) {
         val intent = Intent(Intent.ACTION_VIEW).apply {
             data = Uri.parse(url)

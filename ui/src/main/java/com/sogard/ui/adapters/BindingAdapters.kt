@@ -5,7 +5,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 
-
+/**
+ * Binding adapter that allows adding a custom divider to a RecyclerView list * */
 @BindingAdapter("itemDecorationDrawable", "dividerOrientation")
 fun RecyclerView.customItemDecoration(
     dividerDrawable: Drawable,
